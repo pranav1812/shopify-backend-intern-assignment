@@ -21,6 +21,10 @@ const orderSchema = new mongoose.Schema({
         enum: ORDER_STATUS_ENUM,
         default: 'PENDING',
     },
+    time_stamp: {
+        type: Date,
+        required: true,
+    }
 });
 
 module.exports= mongoose.model('Order', orderSchema);
