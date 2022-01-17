@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const inventorySchema = new mongoose.Schema({
+const inventoryHistorySchema = new mongoose.Schema({
     item_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -70,6 +70,10 @@ const inventorySchema = new mongoose.Schema({
             type: String,
         }
     }],
+    deletion_timestamp: {
+        type: Date,
+        require: true,
+    }
 });
 
-module.exports= mongoose.model('Inventory', inventorySchema);
+module.exports= mongoose.model('InventoryHistory', inventoryHistorySchema);

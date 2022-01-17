@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const {
+    ITEM_CATEGORY_ENUM
+}= require('../utils/constants');
 
 const itemSchema= new mongoose.Schema({
     name: {
@@ -20,7 +23,7 @@ const itemSchema= new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['electronics', 'clothes', 'books', 'others']
+        enum: ITEM_CATEGORY_ENUM,
     },
     is_fragile: {
         type: Boolean,

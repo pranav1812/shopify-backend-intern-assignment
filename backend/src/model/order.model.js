@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
+const {
+    ORDER_STATUS_ENUM
+}= require('../utils/constants');
 
 const orderSchema = new mongoose.Schema({
-    customer_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Customer',
-    },
     items: [{
         item_id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -20,8 +18,8 @@ const orderSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        enum: ['pending', 'processing', 'completed', 'cancelled'],
-        default: 'pending',
+        enum: ORDER_STATUS_ENUM,
+        default: 'PENDING',
     },
 });
 
