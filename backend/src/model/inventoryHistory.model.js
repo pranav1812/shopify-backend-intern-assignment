@@ -32,12 +32,6 @@ const inventoryHistorySchema = new mongoose.Schema({
         required: true,
         default: 0,
     },
-    // in_transit: ordered but not yet delivered
-    units_in_transit: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
     // report low stock below threshold level
     threshold: {
         type: Number,
@@ -49,10 +43,6 @@ const inventoryHistorySchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'TopupInventory',
         },
-        units: {
-            type: Number,
-            required: true,
-        },
         comments: {
             type: String,
         }
@@ -61,10 +51,6 @@ const inventoryHistorySchema = new mongoose.Schema({
         order: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Order',
-        },
-        units: {
-            type: Number,
-            required: true,
         },
         comments: {
             type: String,

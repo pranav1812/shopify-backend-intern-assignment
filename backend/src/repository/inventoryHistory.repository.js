@@ -4,7 +4,7 @@ const InventoryHistory = require('../model/inventoryHistory.model');
 
 const getDeletedRecordById = async (id) => {
     try {
-        var item= await InventoryHistory.findById(id);
+        var item= await InventoryHistory.findById(id).populate('item_id');
         if (!item) {
             console.log(`Item with id: ${id} not found`);
             return [null, "NOT_FOUND"];
@@ -18,7 +18,7 @@ const getDeletedRecordById = async (id) => {
 
 const getAllDeletedInventoryRecords = async (page, pageLimit) => {
     try {
-        var items = await InventoryHistory.find({}).skip(page * pageLimit).limit(pageLimit);
+        var items = await InventoryHistory.find({}).skip(page * pageLimit).limit(pageLimit).populate('item_id');
         return [items, null];
     } catch (error) {
         console.log(`Error in getAllDeletedInventoryRecords: ${error.message}`);

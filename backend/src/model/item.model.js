@@ -16,10 +16,6 @@ const itemSchema= new mongoose.Schema({
         type: Number,
         required: true
     },
-    image: {
-        type: String, // url: not unique as image can be same for similar items of different size
-        required: true
-    },
     category: {
         type: String,
         required: true,

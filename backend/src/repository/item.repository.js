@@ -18,7 +18,8 @@ const getItemById= async (itemId) => {
 
 const getAllItems= async (page, pageLimit) => {
     try {
-        var items= await Item.find({}).skip(page * pageLimit).limit(pageLimit);
+        // populate item_id
+        var items= await Item.find({}).skip(page * pageLimit).limit(pageLimit).populate('item_id');
         return [items, null];
     } catch (error) {
         console.log(`Error in getAllItems: ${error.message}`);

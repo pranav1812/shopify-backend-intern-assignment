@@ -7,7 +7,7 @@ const topupInventorySchema = new mongoose.Schema({
         required: true,
         ref: 'Item',
     },
-    units_ordered: {
+    units_topped_up: {
         type: Number,
         required: true,
     },

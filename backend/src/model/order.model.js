@@ -3,23 +3,16 @@ const {
     ORDER_STATUS_ENUM
 }= require('../utils/constants');
 
+// orders are used to track reduction of inventory
 const orderSchema = new mongoose.Schema({
-    items: [{
-        item_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Item',
-        },
-        units_ordered: {
-            type: Number,
-            required: true,
-        },
-    }],
-    status: {
-        type: String,
+    item_id: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        enum: ORDER_STATUS_ENUM,
-        default: 'PENDING',
+        ref: 'Item',
+    },
+    units_ordered: {
+        type: Number,
+        required: true,
     },
     time_stamp: {
         type: Date,
