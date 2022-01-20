@@ -31,5 +31,8 @@
 10. cd into the newly cloned directory
 11. Install Dependencies with ``` npm install```
 12. Run the frontend with ```npm start```
+### OR Instead of Running the Frontend
+8. Refer to this Postman collection
+<https://www.getpostman.com/collections/235870473f2340917ea1>
 
 #### Please raise an issue if there are any doubts regarding setting up process or project in general
