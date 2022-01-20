@@ -20,17 +20,7 @@ const itemSchema= new mongoose.Schema({
         type: String,
         required: true,
         enum: ITEM_CATEGORY_ENUM,
-    },
-    is_fragile: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    // this is not for an ecom site, so we do not need to store other size items in the same item as available_sizes
-    size: {
-        type: String, // (eg. 1kg, 1pc, 750ml, etc)
-        required: true,
-    },
+    }
 });
 
 module.exports= mongoose.model('Item', itemSchema);

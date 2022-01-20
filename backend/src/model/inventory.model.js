@@ -16,16 +16,6 @@ const inventorySchema = new mongoose.Schema({
         required: true,
         default: 0,
     },
-    units_damaged: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    units_lost: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
     // report low stock below threshold level
     threshold: {
         type: Number,
