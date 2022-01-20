@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const inventoryHistorySchema = new mongoose.Schema({
+const InventoryHistorSchema = new mongoose.Schema({
     item_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -62,4 +62,4 @@ const inventoryHistorySchema = new mongoose.Schema({
     }
 });
 
-module.exports= mongoose.model('InventoryHistory', inventoryHistorySchema);
+module.exports= mongoose.model('InventoryHistor', InventoryHistorSchema);

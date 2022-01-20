@@ -18,12 +18,12 @@ router.get('/getDeletedInventory', getDeletedInventory); // query: {page: 1, lim
 
 router.get('/getSpecificItem/:id', getSpecificItem); // inventory history, etc for that item
 
-router.get('/undoDelete/:id', undoDelete); // undo delete for _id= id in inventoryHistory
+router.get('/undoDelete/:id', undoDelete); // undo delete for _id= id in InventoryHistor
 
 router.put('/topupInventory', topupInventory); // topup inventory
 
 router.put('/reduceItemInventory', reduceItemInventory); // other ways of doing this is via order, topup, etc
 
-router.delete('/deleteItemFromInventory', deleteItemFromInventory); // deleted items will go to inventory history model
+router.get('/deleteItemFromInventory/:id', deleteItemFromInventory); // deleted items will go to inventory history model
 
 module.exports= router;

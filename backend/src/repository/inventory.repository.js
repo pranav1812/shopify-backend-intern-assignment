@@ -4,7 +4,7 @@ const Inventory= require('../model/inventory.model');
 
 const getInventoryRecordById= async (itemId) => {
     try {
-        var item= await Inventory.findById(itemId);
+        var item= await Inventory.findById(itemId).populate('item_id').select('-__v');
         if (!item) {
             console.log(`Item with id: ${itemId} not found`);
             return [null, "NOT_FOUND"];
@@ -18,7 +18,7 @@ const getInventoryRecordById= async (itemId) => {
 
 const getAllInventoryRecords= async (page, pageLimit) => {
     try {
-        var items= await Inventory.find({}).skip(page * pageLimit).limit(pageLimit);
+        var items= await Inventory.find({}).skip(page * pageLimit).limit(pageLimit).populate('item_id');
         return [items, null];
     } catch (error) {
         console.log(`Error in getAllInventoryRecords: ${error.message}`);

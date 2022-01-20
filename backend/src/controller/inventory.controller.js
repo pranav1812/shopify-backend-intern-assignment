@@ -1,7 +1,7 @@
 const {
     ItemRepository,
     OrderRepository,
-    InventoryHistoryRepository,
+    InventoryHistorRepository,
     InventoryRepository,
     TopupRepository,
 }= require('../repository')
@@ -14,7 +14,7 @@ const {
 
 const getAll = async (req, res) => {
     try {
-        var [items, err]= await ItemRepository.getAllItems(req.query.page, req.query.pageLimit);
+        var [items, err]= await InventoryRepository.getAllInventoryRecords(req.query.page, req.query.pageLimit);
         if (err) {
             console.log(`Error in getAll: ${err}`);
             return notFoundResponse(res, err);
@@ -28,7 +28,7 @@ const getAll = async (req, res) => {
 
 const getDeletedInventory = async (req, res) => {
     try {
-        var [items, err]= await InventoryHistoryRepository.getAllDeletedInventoryRecords(req.query.page, req.query.pageLimit);
+        var [items, err]= await InventoryHistorRepository.getAllDeletedInventoryRecords(req.query.page, req.query.pageLimit);
         if (err) {
             console.log(`Error in getAll: ${err}`);
             return notFoundResponse(res, err);
@@ -42,7 +42,7 @@ const getDeletedInventory = async (req, res) => {
 
 const getSpecificItem = async (req, res) => {
     try {
-        var [item, err]= await ItemRepository.getItemById(req.params.id);
+        var [item, err]= await InventoryRepository.getInventoryRecordById(req.params.id);
         if (err) {
             console.log(`Error in getSpecificItem: ${err}`);
             return notFoundResponse(res, err);
@@ -56,8 +56,8 @@ const getSpecificItem = async (req, res) => {
 
 const undoDelete = async (req, res) => {
     try {
-        // check of the item is Present in inventoryHistory
-        var [item, err]= await InventoryHistoryRepository.getDeletedRecordById(req.params.id);
+        // check of the item is Present in InventoryHistor
+        var [item, err]= await InventoryHistorRepository.getDeletedRecordById(req.params.id);
         if (err) {
             console.log(`Error in undoDelete: ${err}`);
             return notFoundResponse(res, 'Specified Item not found as deleted');
@@ -141,13 +141,13 @@ const reduceItemInventory = async (req, res) => {
 const deleteItemFromInventory = async (req, res) => {
     try {
         // get item
-        var [item, err]= await ItemRepository.getItemById(req.params.id);
+        var [item, err]= await InventoryRepository.getInventoryRecordById(req.params.id);
         if (err) {
             console.log(`Error in deleteItemFromInventory: ${err}`);
             return notFoundResponse(res, err);
         }
         // create inventory history record
-        var [inventoryHistoryId, err_]= await InventoryHistoryRepository.deleteAnInventoryRecord(item);
+        var [InventoryHistorId, err_]= await InventoryHistorRepository.deleteAnInventoryRecord(item);
         if (err_) {
             console.log(`Error in deleteItemFromInventory: ${err}`);
             return serverErrorResponse(res, err);
