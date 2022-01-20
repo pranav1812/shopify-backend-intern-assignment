@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    time_stamp: {
+    timestamp: {
         type: Date,
         required: true,
     }

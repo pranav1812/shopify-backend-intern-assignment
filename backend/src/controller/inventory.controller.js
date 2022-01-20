@@ -76,12 +76,13 @@ const undoDelete = async (req, res) => {
 
 const topupInventory = async (req, res) => {
     try {
-        var [item, err]= await ItemRepository.getItemById(req.params.id);
+        var [item, err]= await InventoryRepository.getInventoryRecordById(req.body.id);
         if (err) {
             console.log(`Error in topupInventory: ${err}`);
             return notFoundResponse(res, err);
         }
         // create top up record
+        req.body.item_id= item.item_id;
         var [topupId, err_]= await TopupRepository.addTopupInventoryRecord(req.body);
         if (err_) {
             console.log(`Error in addItem: ${err}`);
@@ -93,7 +94,7 @@ const topupInventory = async (req, res) => {
         })
         item.units_available= item.units_available + req.body.units_topped_up;
         // update item
-        var [itemId, err__]= await ItemRepository.updateItem(item._id, item);
+        var [itemId, err__]= await InventoryRepository.updateInventoryRecord(req.body.id, item);
         if (err__) {
             console.log(`Error in addItem: ${err}`);
             return serverErrorResponse(res, err);
@@ -108,25 +109,32 @@ const topupInventory = async (req, res) => {
 const reduceItemInventory = async (req, res) => {
     try {
         // get item 
-        var [item, err]= await ItemRepository.getItemById(req.params.id);
+        var [item, err]= await InventoryRepository.getInventoryRecordById(req.body.id);
         if (err) {
             console.log(`Error in reduceItemInventory: ${err}`);
             return notFoundResponse(res, err);
         }
         // create order record
+        // console.log('--------------------------------');
+        // console.log(req.body);
+        // console.log('--------------------------------');
         req.body.timestamp= new Date();
-        var [order, err_]= await OrderRepository.addOrder(req.body);
+        // item= {...req.body, ...item};
+        req.body.item_id= item.item_id;
+
+        // console.log(item);
+        var [order_id, err_]= await OrderRepository.addOrder(req.body);
         if (err_) {
             console.log(`Error in addItem: ${err}`);
             return serverErrorResponse(res, err);
         }
-        item.order_history.push({
-            order_id: order._id,
+        item.reduction_history.push({
+            order_id: order_id,
             comments: req.body.comments,
         })
         item.units_available= item.units_available - req.body.units_ordered;
         // update item
-        var [itemId, err__]= await ItemRepository.updateItem(item._id, item);
+        var [itemId, err__]= await InventoryRepository.updateInventoryRecord(req.body.id, item);
         if (err__) {
             console.log(`Error in addItem: ${err}`);
             return serverErrorResponse(res, err);

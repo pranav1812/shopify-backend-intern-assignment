@@ -28,6 +28,7 @@ const getAllTopupInventoryRecords= async (page, pageLimit) => {
 
 const addTopupInventoryRecord= async (newObj) => {
     try {
+        console.log(newObj);
         var newRecord= new TopupInventory(newObj);
         var newRecordSaved= await newRecord.save();
         return [newRecordSaved._id, null];

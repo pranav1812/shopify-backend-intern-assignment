@@ -28,7 +28,9 @@ const getAllOrders = async (page, pageLimit) => {
 
 const addOrder = async (newObj) => {
     try {
-        newObj['time_stamp'] = new Date();
+        console.log('------------------------------------');
+        console.log(newObj);
+        console.log('------------------------------------');
         var newRecord = new Order(newObj);
         var newRecordSaved = await newRecord.save();
         return [newRecordSaved._id, null];
