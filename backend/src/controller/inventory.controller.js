@@ -62,10 +62,16 @@ const undoDelete = async (req, res) => {
             console.log(`Error in undoDelete: ${err}`);
             return notFoundResponse(res, 'Specified Item not found as deleted');
         }
-        var [newItemId, err_]= await ItemRepository.addItem(item);
+        console.log(item);
+        var [newItemId, err_]= await InventoryRepository.addInventoryRecord(item);
         if (err_) {
             console.log(`Error in undoDelete: ${err_}`);
             return notFoundResponse(res, err_);
+        }
+        var [removeFromHistory, err__]= await InventoryHistorRepository.undoDeleteInventoryRecord(req.params.id);
+        if (err__) {
+            console.log(`Error in undoDelete: ${err__}`);
+            return serverErrorResponse(res, err__);
         }
         return successResponse(res, 'Item deletion undo successful', newItemId);
     } catch (error) {

@@ -29,16 +29,22 @@ const getAllDeletedInventoryRecords = async (page, pageLimit) => {
 const deleteAnInventoryRecord = async (obj) => {
     try {
         // add that record to InventoryHistor
-        obj['deletion_timestamp'] = new Date();
-        obj.item_id= obj.item_id._id;
+        console.log(`obj: ${JSON.stringify(obj, null, 2)}`);
         // remove _id from obj
-        delete obj._id;
-        console.log(obj);
+        obj= JSON.parse(JSON.stringify(obj));
+        var toSave= {
+            deletion_timestamp: new Date(),
+        }
+        Object.keys(obj).forEach(key => {
+            toSave[key]= obj[key];
+        })
+
         console.log('-----------------')
-        var newRecord= new InventoryHistor(obj);
+        // concat the {deletion_timestamp: new Date()} with the obj
+        var newRecord= new InventoryHistor(toSave);
         console.log(newRecord);
         var newRecordSaved= await newRecord.save();
-
+        // console.log("saved deleted record")
         return [newRecordSaved._id, null];
     } catch (error) {
         console.log(`Error in deleteAnInventoryRecord: ${error.message}`);

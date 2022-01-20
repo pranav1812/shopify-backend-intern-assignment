@@ -35,4 +35,6 @@
 8. Refer to this Postman collection
 <https://www.getpostman.com/collections/235870473f2340917ea1>
 
+#### Prefer using Postman as Fronend might not be working fine.
+
 #### Please raise an issue if there are any doubts regarding setting up process or project in general

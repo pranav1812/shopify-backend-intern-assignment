@@ -28,6 +28,7 @@ const getAllInventoryRecords= async (page, pageLimit) => {
 
 const addInventoryRecord= async (newObj) => {
     try {
+        newObj= JSON.parse(JSON.stringify(newObj));
         var newRecord= new Inventory(newObj);
         var newRecordSaved= await newRecord.save();
         return [newRecordSaved._id, null];
@@ -50,6 +51,7 @@ const updateInventoryRecord= async (itemId, newObj)=> {
 const deleteInventoryRecord= async (itemId) => {
     try {
         var item= await Inventory.findByIdAndDelete(itemId);
+        console.log(`item: ${JSON.stringify(item, null, 2)}`);
         return [item._id, null];
     } catch (error) {
         console.log(`Error in deleteInventoryRecord: ${error.message}`);
